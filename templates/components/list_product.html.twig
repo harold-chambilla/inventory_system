@@ -1,0 +1,29 @@
+<div{{ attributes }}
+    data-poll
+>
+    Productos ({{ this.productos|length }})
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Stock</th>
+    </tr>
+  </thead>
+  {% if this.productos|length %}
+  <tbody>
+    {% for product in this.productos %}
+    <tr>
+      <th scope="row">{{ product.id }}</th>
+      <td>{{ product.nombre }}</td>
+      <td>{{ product.precio }}</td>
+      <td>{{ product.stock }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  {% else %}
+    <div><em>No existen productos.</em></div>
+    {% endif %}
+</table>
+</div>

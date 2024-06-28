@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240621070020 extends AbstractMigration
+final class Version20240622001134 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -34,6 +34,9 @@ final class Version20240621070020 extends AbstractMigration
         $this->addSql('CREATE TABLE transacciones (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, producto_id_id INTEGER DEFAULT NULL, proveedor_id_id INTEGER DEFAULT NULL, tipo VARCHAR(64) DEFAULT NULL, fecha DATETIME DEFAULT NULL, cantidad INTEGER DEFAULT NULL, CONSTRAINT FK_66C5ED5E3F63963D FOREIGN KEY (producto_id_id) REFERENCES productos (id) NOT DEFERRABLE INITIALLY IMMEDIATE, CONSTRAINT FK_66C5ED5E193A0047 FOREIGN KEY (proveedor_id_id) REFERENCES proveedores (id) NOT DEFERRABLE INITIALLY IMMEDIATE)');
         $this->addSql('CREATE INDEX IDX_66C5ED5E3F63963D ON transacciones (producto_id_id)');
         $this->addSql('CREATE INDEX IDX_66C5ED5E193A0047 ON transacciones (proveedor_id_id)');
+        $this->addSql('CREATE TABLE usuario (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username VARCHAR(180) NOT NULL, roles CLOB NOT NULL --(DC2Type:json)
+        , password VARCHAR(255) NOT NULL)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_IDENTIFIER_USERNAME ON usuario (username)');
         $this->addSql('CREATE TABLE ventas (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, cliente_id_id INTEGER DEFAULT NULL, fecha DATETIME DEFAULT NULL, total NUMERIC(10, 2) DEFAULT NULL, CONSTRAINT FK_808D9EACC9C364 FOREIGN KEY (cliente_id_id) REFERENCES clientes (id) NOT DEFERRABLE INITIALLY IMMEDIATE)');
         $this->addSql('CREATE INDEX IDX_808D9EACC9C364 ON ventas (cliente_id_id)');
     }
@@ -48,6 +51,7 @@ final class Version20240621070020 extends AbstractMigration
         $this->addSql('DROP TABLE productos');
         $this->addSql('DROP TABLE proveedores');
         $this->addSql('DROP TABLE transacciones');
+        $this->addSql('DROP TABLE usuario');
         $this->addSql('DROP TABLE ventas');
     }
 }

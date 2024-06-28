@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TransparenciaController!{% endblock %}
+
+{% block body %}
+
+<h1>Lista de Productos (Live)</h1>
+  {{ component('list_product') }}
+
+<h1>Lista de Productos</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Stock</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in products %}
+    <tr>
+      <th scope="row">{{ product.id }}</th>
+      <td>{{ product.nombre }}</td>
+      <td>{{ product.precio }}</td>
+      <td>{{ product.stock }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h1>Transacciones</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Stock</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for transaccion in transacciones %}
+      <tr>
+        <th scope="row">{{ transaccion.id }}</th>
+      <td>{{ transaccion.tipo }}</td>
+      <td>{{ transaccion.fecha ? transaccion.fecha|date('Y-m-d H:i:s') : '' }}</td>
+      <td>{{ transaccion.cantidad }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+{% endblock %}
